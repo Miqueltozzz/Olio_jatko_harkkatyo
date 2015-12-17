@@ -80,7 +80,16 @@ void Peli::asetaPalanTyyppi(Julkinen::ErikoispalaTyyppi tyyppi, Julkinen::Koordi
 	{
 		if (_palat[a].getSijainti() == kohde)
 		{
-			DEBUG_OUTPUT("asetaPalanTyyppi, tyyppi: " << tyyppi << std::endl);
+			if (_palat[a].getSijainti().onkoIrtopala() != 1)
+			{
+				DEBUG_OUTPUT("asetaPalanTyyppi, tyyppi: " << tyyppi << "sijainti: " << _palat[a].haeSijainti().haeXkoordinaatti() << "." << _palat[a].haeSijainti().haeYkoordinaatti() << std::endl);
+			}
+			else
+			{
+				DEBUG_OUTPUT("asetaPalanTyyppi, tyyppi: " << tyyppi << "sijainti: irtopala" << std::endl);
+			}
+			_palat[a].setErikoisPalaTyyppi(tyyppi);
+			_palat[a].setErikoisPalaKohde(kohde);
 		}
 	}
 }
@@ -254,17 +263,28 @@ bool Peli::vaihdaVuoro() {
 
 void Peli::paivitaNaytto()
 {
-	//lis�� pelaajat laudalle
-	for (unsigned int a = 0; a < _pelaajat.size(); a++)
-	{
-		//_naytto->pelaajaLaudalle(_pelaajat[a].haeMerkki(), haeKoordinaatti());
-	}
+	DEBUG_OUTPUT("paivitaNaytto"<< std::endl);
+	
+	
 	//lis�� palat laudalle
 	for (unsigned int a = 0; a < _palat.size(); a++)
 	{
-		_naytto->palaLaudalle(_palat[a].haePalaTyyppi(), Julkinen::NORMAALI, _palat[a].haeRotaatio(), _palat[a].haeSijainti(), Julkinen::Koordinaatti());
+		_naytto->palaLaudalle(_palat[a].haePalaTyyppi(), _palat[a].haeErikoisPalaTyyppi(), _palat[a].haeRotaatio(), _palat[a].haeSijainti(), _palat[a].haeErikoisPalaKohde());
+	}
+
+	//lis�� pelaajat laudalle
+	for (unsigned int a = 0; a < _pelaajat.size(); a++)
+	{
+		_naytto->pelaajaLaudalle(_pelaajat[a].haeLyhenne(), _pelaajat[a].haeSijainti());
 	}
 	//lis�� esineet laudalle
+	for (unsigned int a = 0; a < _palat.size(); a++)
+	{
+		if (_palat[a].haeEsineMerkki() != '0')
+		{
+			_naytto->esineLaudalle(_palat[a].haeEsineMerkki(), _palat[a].haeSijainti());
+		}
+	}
 }
 
 Julkinen::PelaajaTyyppi Peli::haeVuorossa() {

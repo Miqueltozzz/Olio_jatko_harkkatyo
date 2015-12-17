@@ -18,6 +18,14 @@ Julkinen::Koordinaatti Pelaaja::haeSijainti()
 {
 	return _sijainti;
 }
+std::string Pelaaja::haeNimi()
+{
+	return _nimi;
+}
+char Pelaaja::haeLyhenne()
+{
+	return _lyhenne;
+}
 ;
 
 Pelaaja::~Pelaaja()
