@@ -29,8 +29,8 @@ public:
 	std::string haeEsinePelaaja();
 	Julkinen::Koordinaatti haeErikoisPalaKohde();
 
-	//bool lapiKavely(Julkinen::Suunta);
-	//bool sisaanKavely(Julkinen::Suunta);
+	bool lapiKavely(Julkinen::Suunta);
+	bool sisaanKavely(Julkinen::Suunta);
 	//esineen metodit
 
 private:

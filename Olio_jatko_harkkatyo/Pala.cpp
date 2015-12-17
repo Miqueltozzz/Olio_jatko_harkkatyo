@@ -86,3 +86,93 @@ Julkinen::Koordinaatti Pala::haeErikoisPalaKohde()
 {
 	return _erikoisPalaKohde;
 }
+
+bool Pala::lapiKavely(Julkinen::Suunta suunta)
+{
+	if (_pala == Julkinen::IPALA){
+		if (suunta == Julkinen::ALAS || suunta == Julkinen::YLOS){
+			if (_rotaatio == 1 || _rotaatio == 3){
+				return true;
+			}
+		}
+		else if (suunta == Julkinen::OIKEALLE || suunta == Julkinen::VASEMMALLE){
+			if (_rotaatio == 2 || _rotaatio == 4){
+				return true;
+			}
+		}
+	}
+	else if (_pala == Julkinen::TPALA){
+		if (suunta == Julkinen::ALAS || suunta == Julkinen::YLOS){
+			if (_rotaatio == 2 || _rotaatio == 4){
+				return true;
+			}
+		}
+		else if (suunta == Julkinen::OIKEALLE || suunta == Julkinen::VASEMMALLE){
+			if (_rotaatio == 1 || _rotaatio == 3){
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool Pala::sisaanKavely(Julkinen::Suunta suunta)
+{
+	if (_pala == Julkinen::IPALA){
+		if (suunta == Julkinen::ALAS || suunta == Julkinen::YLOS){
+			if (_rotaatio == 1 || _rotaatio == 3){
+				return true;
+			}
+		}
+		else if (suunta == Julkinen::OIKEALLE || suunta == Julkinen::VASEMMALLE){
+			if (_rotaatio == 2 || _rotaatio == 4){
+				return true;
+			}
+		}
+	}
+	else if (_pala == Julkinen::TPALA){
+		if (suunta == Julkinen::ALAS){
+			if (_rotaatio == 2 || _rotaatio == 4 || _rotaatio == 3){
+				return true;
+			}
+		}
+		else if (suunta == Julkinen::YLOS){
+			if (_rotaatio == 1 || _rotaatio == 2 || _rotaatio == 4){
+				return true;
+			}
+		}
+		else if (suunta == Julkinen::OIKEALLE){
+			if (_rotaatio == 1 || _rotaatio == 3 || _rotaatio == 2){
+				return true;
+			}
+		}
+		else if (suunta == Julkinen::VASEMMALLE){
+			if (_rotaatio == 1 || _rotaatio == 3 || _rotaatio == 4){
+				return true;
+			}
+		}
+	}
+	else if (_pala == Julkinen::LPALA){
+		if (suunta == Julkinen::ALAS){
+			if (_rotaatio == 1 || _rotaatio == 4){
+				return true;
+			}
+		}
+		else if (suunta == Julkinen::YLOS){
+			if (_rotaatio == 3 || _rotaatio == 2){
+				return true;
+			}
+		}
+		else if (suunta == Julkinen::OIKEALLE){
+			if (_rotaatio == 4 || _rotaatio == 3){
+				return true;
+			}
+		}
+		else if (suunta == Julkinen::VASEMMALLE){
+			if (_rotaatio == 1 || _rotaatio == 2){
+				return true;
+			}
+		}
+	}
+	return false;
+}
