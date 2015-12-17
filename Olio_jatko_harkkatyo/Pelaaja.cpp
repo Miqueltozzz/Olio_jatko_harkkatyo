@@ -14,6 +14,10 @@ Julkinen::PelaajaTyyppi Pelaaja::haePelaajaTyyppi()
 {
 	return _tyyppi;
 }
+Julkinen::Koordinaatti Pelaaja::haeSijainti()
+{
+	return _sijainti;
+}
 ;
 
 Pelaaja::~Pelaaja()

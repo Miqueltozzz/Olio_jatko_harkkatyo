@@ -44,6 +44,7 @@ public:
 	void komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned int rotaatio);
 	void komentoLiiku(Julkinen::Suunta suunta, unsigned int maara = 0);
 	bool vaihdaVuoro();
+	void paivitaNaytto();//nayton pitaa olla rakennustilassa ennen tätä
 	Julkinen::PelaajaTyyppi haeVuorossa();
 
 private:

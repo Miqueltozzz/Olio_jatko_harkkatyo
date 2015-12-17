@@ -10,6 +10,8 @@ public:
 	Pelaaja();
 	Pelaaja(Julkinen::PelaajaTyyppi tyyppi, std::string nimi, char lyhenne, Julkinen::Koordinaatti sijainti);
 	Julkinen::PelaajaTyyppi haePelaajaTyyppi();
+	Julkinen::Koordinaatti haeSijainti();
+
 	~Pelaaja();
 private:
 	std::string _nimi;

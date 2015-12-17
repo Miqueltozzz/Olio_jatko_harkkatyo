@@ -26,6 +26,7 @@ void Peli::alustusLopeta()
 	ESIEHTO(onkoAlustustilassa());
 	_alustusTila = false;
 	_peliTila = true;
+	paivitaNaytto();
 	_naytto->komentoLopetaRakennus();
 	JALKIEHTO(onkoPelitilassa());
 }
@@ -59,7 +60,7 @@ void Peli::lisaaPala(Julkinen::PalaTyyppi pala, unsigned int rotaatio, Julkinen:
 		DEBUG_OUTPUT("LisaaPala (irtopala), tyyppi: " << pala << std::endl);
 	}
 	_palat.push_back(Pala(pala, rotaatio, sijainti));
-	_naytto->palaLaudalle(pala, Julkinen::NORMAALI, rotaatio, sijainti, Julkinen::Koordinaatti()); //tulostuksen testausta -> tï¿½mï¿½ poistetaan kun tulostus on kunnossa
+	//_naytto->palaLaudalle(pala, Julkinen::NORMAALI, rotaatio, sijainti, Julkinen::Koordinaatti()); //tulostuksen testausta -> tï¿½mï¿½ poistetaan kun tulostus on kunnossa
 }
 
 void Peli::lisaaEsine(char merkki, Julkinen::Koordinaatti const& sijainti, std::string const& pelaaja) {
@@ -101,12 +102,12 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		throw Julkinen::Komentovirhe(Julkinen::Komentovirhe::VIRHE_VIRHEELLINEN_ROTAATIO);
 		return;
 	}
-
+	_naytto->komentoAloitaRakennus();
 	//Irtopala talteen
 	Pala apupala(_palat[_alueenKoko * _alueenKoko]);
 	apupala.setRotaatio(rotaatio);
 
-	//Siirrä palat
+	//Siirrï¿½ palat
 	if (reuna == Julkinen::ALA){
 
 		//Uusi irtopala
@@ -157,7 +158,8 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		_palat[((paikka - 1) * _alueenKoko) + _alueenKoko - 1] = apupala;
 	}
 	_tyonnetty = true;
-
+	paivitaNaytto();
+	_naytto->komentoLopetaRakennus();
 }
 
 void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
@@ -175,6 +177,21 @@ bool Peli::vaihdaVuoro() {
 		_vuorossa++;
 	}
 	return 1;
+}
+
+void Peli::paivitaNaytto()
+{
+	//lisï¿½ï¿½ pelaajat laudalle
+	for (unsigned int a = 0; a < _pelaajat.size(); a++)
+	{
+		//_naytto->pelaajaLaudalle(_pelaajat[a].haeMerkki(), haeKoordinaatti());
+	}
+	//lisï¿½ï¿½ palat laudalle
+	for (unsigned int a = 0; a < _palat.size(); a++)
+	{
+		_naytto->palaLaudalle(_palat[a].haePalaTyyppi(), Julkinen::NORMAALI, _palat[a].haeRotaatio(), _palat[a].haeSijainti(), Julkinen::Koordinaatti());
+	}
+	//lisï¿½ï¿½ esineet laudalle
 }
 
 Julkinen::PelaajaTyyppi Peli::haeVuorossa() {

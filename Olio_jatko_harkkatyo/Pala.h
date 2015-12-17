@@ -18,6 +18,13 @@ public:
 	void setSijainti(unsigned int xkoord, unsigned int ykoord);
 	void setIrtopala(bool irtopala);
 	void setRotaatio(unsigned int rot);
+
+	Julkinen::PalaTyyppi haePalaTyyppi();
+	unsigned int haeRotaatio();
+	Julkinen::Koordinaatti haeSijainti();
+	Julkinen::ErikoispalaTyyppi haeErikoisPalaTyyppi();
+	char haeEsineMerkki();
+	std::string haeEsinePelaaja();
 	//esineen metodit
 
 private:

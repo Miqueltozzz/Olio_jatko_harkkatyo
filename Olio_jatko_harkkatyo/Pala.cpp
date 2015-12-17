@@ -41,3 +41,33 @@ void Pala::setRotaatio(unsigned int rot)
 {
 	_rotaatio = rot;
 }
+
+Julkinen::PalaTyyppi Pala::haePalaTyyppi()
+{
+	return _pala;
+}
+
+unsigned int Pala::haeRotaatio()
+{
+	return _rotaatio;
+}
+
+Julkinen::Koordinaatti Pala::haeSijainti()
+{
+	return _sijainti;
+}
+
+Julkinen::ErikoispalaTyyppi Pala::haeErikoisPalaTyyppi()
+{
+	return _erikoispalaTyyppi;
+}
+
+char Pala::haeEsineMerkki()
+{
+	return _merkki;
+}
+
+std::string Pala::haeEsinePelaaja()
+{
+	return _pelaaja;
+}
