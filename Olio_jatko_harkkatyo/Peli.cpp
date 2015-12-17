@@ -16,6 +16,7 @@ void Peli::lisaaNaytto(Julkinen::Nayttorajapinta* naytto)
 {
 	ESIEHTO(onkoAlustustilassa());
 	_naytto = naytto;
+	_naytto->komentoAloitaRakennus();
 	JALKIEHTO(_naytto != 0);
 
 }
@@ -25,7 +26,7 @@ void Peli::alustusLopeta()
 	ESIEHTO(onkoAlustustilassa());
 	_alustusTila = false;
 	_peliTila = true;
-
+	_naytto->komentoLopetaRakennus();
 	JALKIEHTO(onkoPelitilassa());
 }
 
@@ -47,13 +48,30 @@ void Peli::lisaaPelaaja(Julkinen::PelaajaTyyppi tyyppi, std::string const& nimi,
 }
 
 void Peli::lisaaPala(Julkinen::PalaTyyppi pala, unsigned int rotaatio, Julkinen::Koordinaatti const& sijainti) {
-	DEBUG_OUTPUT("LisaaPala, tyyppi: " << pala << std::endl);
+	// ei toimi-> irtopalan koordinaatteja ei saa kysy� DEBUG_OUTPUT("LisaaPala, tyyppi: " << pala << "sijainti: " << sijainti.haeXkoordinaatti() << "," << sijainti.haeYkoordinaatti()<<" irtopala: "<<sijainti.onkoIrtopala() << std::endl);
+	
+	if (sijainti.onkoIrtopala() != 1)
+	{
+		DEBUG_OUTPUT("LisaaPala, tyyppi: " << pala << "sijainti: " << sijainti.haeXkoordinaatti() << "," << sijainti.haeYkoordinaatti() << std::endl);
+	}
+	else
+	{
+		DEBUG_OUTPUT("LisaaPala (irtopala), tyyppi: " << pala << std::endl);
+	}
 	_palat.push_back(Pala(pala, rotaatio, sijainti));
+	_naytto->palaLaudalle(pala, Julkinen::NORMAALI, rotaatio, sijainti, Julkinen::Koordinaatti()); //tulostuksen testausta -> t�m� poistetaan kun tulostus on kunnossa
 }
 
 void Peli::lisaaEsine(char merkki, Julkinen::Koordinaatti const& sijainti, std::string const& pelaaja) {
-
-	DEBUG_OUTPUT("LisaaEsine, merkki: " << merkki <<" pelaaja: "<<pelaaja<< std::endl);
+	for (unsigned int a = 0; a < _palat.size(); a++)
+	{
+		if (_palat[a].getSijainti() == sijainti)
+		{
+			DEBUG_OUTPUT("LisaaEsine, merkki: " << merkki << " pelaaja: " << pelaaja << std::endl);
+			_palat[a].asetaEsine(pelaaja, merkki);
+		}
+	}
+	
 }
 
 void Peli::asetaPalanTyyppi(Julkinen::ErikoispalaTyyppi tyyppi, Julkinen::Koordinaatti const& sijainti, Julkinen::Koordinaatti const& kohde) {
@@ -147,9 +165,19 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 }
 
 bool Peli::vaihdaVuoro() {
-	return 0;
+	//palauttaa 0 jos peli loppuu
+	if (_vuorossa == _pelaajat.size()-1)
+	{
+		_vuorossa = 0;
+	}
+	else
+	{
+		_vuorossa++;
+	}
+	return 1;
 }
 
 Julkinen::PelaajaTyyppi Peli::haeVuorossa() {
-	return Julkinen::IHMINEN;
+	//return Julkinen::IHMINEN;
+	return _pelaajat[_vuorossa].haePelaajaTyyppi();
 }

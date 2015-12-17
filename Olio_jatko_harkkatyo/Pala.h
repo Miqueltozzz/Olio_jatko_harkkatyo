@@ -11,6 +11,7 @@ public:
 	//palan metodit
 	Pala();
 	Pala(Julkinen::PalaTyyppi pala, unsigned int rotaatio, Julkinen::Koordinaatti sijainti);
+	void asetaEsine(std::string pelaaja, char merkki);	//lisää palaan esineen tiedot
 	~Pala();
 
 	Julkinen::Koordinaatti getSijainti();
@@ -28,8 +29,8 @@ private:
 	Julkinen::ErikoispalaTyyppi _erikoispalaTyyppi;
 
 	//esineen muuttujat
-	char _Merkki;
+	char _merkki;
 	//Esineen koordinaattia ei tarvita, koska palalla on jo koordinaatti
-	std::string _Pelaaja;
+	std::string _pelaaja;
 };
 
