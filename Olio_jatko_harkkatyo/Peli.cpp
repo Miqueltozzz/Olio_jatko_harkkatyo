@@ -64,8 +64,15 @@ void Peli::lisaaPala(Julkinen::PalaTyyppi pala, unsigned int rotaatio, Julkinen:
 }
 
 void Peli::lisaaEsine(char merkki, Julkinen::Koordinaatti const& sijainti, std::string const& pelaaja) {
-
-	DEBUG_OUTPUT("LisaaEsine, merkki: " << merkki <<" pelaaja: "<<pelaaja<< std::endl);
+	for (unsigned int a = 0; a < _palat.size(); a++)
+	{
+		if (_palat[a].getSijainti() == sijainti)
+		{
+			DEBUG_OUTPUT("LisaaEsine, merkki: " << merkki << " pelaaja: " << pelaaja << std::endl);
+			_palat[a].asetaEsine(pelaaja, merkki);
+		}
+	}
+	
 }
 
 void Peli::asetaPalanTyyppi(Julkinen::ErikoispalaTyyppi tyyppi, Julkinen::Koordinaatti const& sijainti, Julkinen::Koordinaatti const& kohde) {
