@@ -1,5 +1,6 @@
 #include "Peli.h"
 
+//*Testikommentti testipushausta varten* -Tuomas Hakala
 
 Peli::Peli() {
 	_alustusTila = true;
