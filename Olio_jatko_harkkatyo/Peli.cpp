@@ -93,7 +93,7 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		throw Julkinen::Komentovirhe(Julkinen::Komentovirhe::VIRHE_TUNNISTAMATON_KOMENTO);
 		return;
 	}
-	if (paikka < 1 || paikka > _alueenKoko){
+	if (paikka < 1 || paikka > (unsigned int) _alueenKoko){
 		throw Julkinen::Komentovirhe(Julkinen::Komentovirhe::VIRHE_OLEMATON_PAIKKA);
 		return;
 	}
@@ -112,7 +112,7 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		//Uusi irtopala
 		_palat[_alueenKoko * _alueenKoko] = _palat[paikka - 1];
 		_palat[_alueenKoko * _alueenKoko].setIrtopala(true);
-		for (unsigned int i = 0; i < _alueenKoko - 1; i++){
+		for (unsigned int i = 0; i < (unsigned int) _alueenKoko - 1; i++){
 			_palat[(paikka - 1) + (_alueenKoko * i)] = _palat[(paikka - 1) + (_alueenKoko * (i + 1))];
 			_palat[(paikka - 1) + (_alueenKoko * i)].setSijainti(paikka, i + 1);
 		}
