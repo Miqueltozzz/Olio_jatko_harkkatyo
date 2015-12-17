@@ -87,9 +87,19 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 }
 
 bool Peli::vaihdaVuoro() {
-	return 0;
+	//palauttaa 0 jos peli loppuu
+	if (_vuorossa == _pelaajat.size()-1)
+	{
+		_vuorossa = 0;
+	}
+	else
+	{
+		_vuorossa++;
+	}
+	return 1;
 }
 
 Julkinen::PelaajaTyyppi Peli::haeVuorossa() {
-	return Julkinen::IHMINEN;
+	//return Julkinen::IHMINEN;
+	return _pelaajat[_vuorossa].haePelaajaTyyppi();
 }

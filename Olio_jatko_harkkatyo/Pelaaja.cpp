@@ -9,7 +9,12 @@ Pelaaja::Pelaaja(Julkinen::PelaajaTyyppi tyyppi, std::string nimi, char lyhenne,
 	_tyyppi(tyyppi),_nimi(nimi),_lyhenne(lyhenne),_sijainti(sijainti)
 	//Parametrinen rakentaja /Mikael Jokinen
 {
-};
+}
+Julkinen::PelaajaTyyppi Pelaaja::haePelaajaTyyppi()
+{
+	return _tyyppi;
+}
+;
 
 Pelaaja::~Pelaaja()
 {

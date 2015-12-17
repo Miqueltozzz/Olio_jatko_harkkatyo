@@ -9,6 +9,7 @@ class Pelaaja
 public:
 	Pelaaja();
 	Pelaaja(Julkinen::PelaajaTyyppi tyyppi, std::string nimi, char lyhenne, Julkinen::Koordinaatti sijainti);
+	Julkinen::PelaajaTyyppi haePelaajaTyyppi();
 	~Pelaaja();
 private:
 	std::string _nimi;
