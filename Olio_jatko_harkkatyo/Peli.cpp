@@ -181,15 +181,19 @@ bool Peli::vaihdaVuoro() {
 
 void Peli::paivitaNaytto()
 {
-	//lis�� pelaajat laudalle
-	for (unsigned int a = 0; a < _pelaajat.size(); a++)
-	{
-		//_naytto->pelaajaLaudalle(_pelaajat[a].haeMerkki(), haeKoordinaatti());
-	}
+	DEBUG_OUTPUT("paivitaNaytto"<< std::endl);
+	
+	
 	//lis�� palat laudalle
 	for (unsigned int a = 0; a < _palat.size(); a++)
 	{
 		_naytto->palaLaudalle(_palat[a].haePalaTyyppi(), Julkinen::NORMAALI, _palat[a].haeRotaatio(), _palat[a].haeSijainti(), Julkinen::Koordinaatti());
+	}
+
+	//lis�� pelaajat laudalle
+	for (unsigned int a = 0; a < _pelaajat.size(); a++)
+	{
+		_naytto->pelaajaLaudalle(_pelaajat[a].haeLyhenne(), _pelaajat[a].haeSijainti());
 	}
 	//lis�� esineet laudalle
 }
