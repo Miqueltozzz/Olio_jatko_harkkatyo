@@ -39,9 +39,26 @@ unsigned int Julkinen::Koordinaatti::haeYkoordinaatti() const
 	return _ykoord;
 }
 
+void Julkinen::Koordinaatti::asetaXkoordinaatti(unsigned int koord)
+{
+	ESIEHTO(!onkoIrtopala());
+	_xkoord = koord;
+}
+
+void Julkinen::Koordinaatti::asetaYkoordinaatti(unsigned int koord)
+{
+	ESIEHTO(!onkoIrtopala());
+	_ykoord = koord;
+}
+
 bool Julkinen::Koordinaatti::onkoIrtopala() const
 { 
 	return _irtopala;
+}
+
+void Julkinen::Koordinaatti::asetaIrtopala(bool irtopala)
+{
+	_irtopala = irtopala;
 }
 
 void Julkinen::Koordinaatti::operator=(Koordinaatti const& koordinaatti)

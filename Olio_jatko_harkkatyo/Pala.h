@@ -14,7 +14,9 @@ public:
 	~Pala();
 
 	Julkinen::Koordinaatti getSijainti();
-
+	void setSijainti(unsigned int xkoord, unsigned int ykoord);
+	void setIrtopala(bool irtopala);
+	void setRotaatio(unsigned int rot);
 	//esineen metodit
 
 private:

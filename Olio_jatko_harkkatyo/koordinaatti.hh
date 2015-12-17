@@ -102,6 +102,12 @@
 			 */
 			unsigned int haeYkoordinaatti() const;
 
+			//Lisännyt Tuomas Hakala
+			void asetaXkoordinaatti(unsigned int koord);
+
+			//Lisännyt Tuomas Hakala
+			void asetaYkoordinaatti(unsigned int koord);
+
 			/**
 			 *	\brief Kertoo onko kyseessä irtopala.
 			 *
@@ -112,6 +118,8 @@
 			 *		Palauttaa \c false jos kyseessä ei ole irtopala.
 			 */
 			bool onkoIrtopala() const;
+
+			void asetaIrtopala(bool irtopala);
 
 			/**
 			 *	\brief Sijoitusoperaattori.

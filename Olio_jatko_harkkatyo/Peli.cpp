@@ -1,6 +1,5 @@
 #include "Peli.h"
 
-//*Testikommentti testipushausta varten* -Tuomas Hakala
 
 Peli::Peli() {
 	_alustusTila = true;
@@ -68,6 +67,78 @@ void Peli::asetaPalanTyyppi(Julkinen::ErikoispalaTyyppi tyyppi, Julkinen::Koordi
 }
 
 void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned int rotaatio) {
+	if (_tyonnetty){
+		throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_IRTOPALAA_ON_JO_TYONNETTY);
+		return;
+	}
+	if (reuna == Julkinen::EIOLE){
+		throw Julkinen::Komentovirhe(Julkinen::Komentovirhe::VIRHE_TUNNISTAMATON_KOMENTO);
+		return;
+	}
+	if (paikka < 1 || paikka > _alueenKoko){
+		throw Julkinen::Komentovirhe(Julkinen::Komentovirhe::VIRHE_OLEMATON_PAIKKA);
+		return;
+	}
+	if (rotaatio < 1 || rotaatio > 4){
+		throw Julkinen::Komentovirhe(Julkinen::Komentovirhe::VIRHE_VIRHEELLINEN_ROTAATIO);
+		return;
+	}
+
+	//Irtopala talteen
+	Pala apupala(_palat[_alueenKoko * _alueenKoko]);
+	apupala.setRotaatio(rotaatio);
+
+	//Siirrä palat
+	if (reuna == Julkinen::ALA){
+
+		//Uusi irtopala
+		_palat[_alueenKoko * _alueenKoko] = _palat[paikka - 1];
+		_palat[_alueenKoko * _alueenKoko].setIrtopala(true);
+		for (unsigned int i = 0; i < _alueenKoko - 1; i++){
+			_palat[(paikka - 1) + (_alueenKoko * i)] = _palat[(paikka - 1) + (_alueenKoko * (i + 1))];
+			_palat[(paikka - 1) + (_alueenKoko * i)].setSijainti(paikka, i + 1);
+		}
+		apupala.setIrtopala(false);
+		apupala.setSijainti(paikka, _alueenKoko);
+		_palat[(paikka - 1) + (_alueenKoko * (_alueenKoko - 1))] = apupala;
+	}
+	if (reuna == Julkinen::YLA){
+		//Uusi irtopala
+		_palat[_alueenKoko * _alueenKoko] = _palat[(paikka - 1) + (_alueenKoko * (_alueenKoko - 1))];
+		_palat[_alueenKoko * _alueenKoko].setIrtopala(true);
+		for (unsigned int i = _alueenKoko - 2; i >= 0; i--){
+			_palat[(paikka - 1) + (_alueenKoko * (i + 1))] = _palat[(paikka - 1) + (_alueenKoko * i)];
+			_palat[(paikka - 1) + (_alueenKoko * (i + 1))].setSijainti(paikka, i + 2);
+		}
+		apupala.setIrtopala(false);
+		apupala.setSijainti(paikka, 1);
+		_palat[(paikka - 1)] = apupala;
+	}
+	if (reuna == Julkinen::VASEN){
+		//Uusi irtopala
+		_palat[_alueenKoko * _alueenKoko] = _palat[_alueenKoko - 1 + ((paikka - 1) * _alueenKoko)];
+		_palat[_alueenKoko * _alueenKoko].setIrtopala(true);
+		for (unsigned int i = ((paikka - 1) * _alueenKoko) + 4; i > (paikka - 1) * _alueenKoko; i--){
+			_palat[i] = _palat[i - 1];
+			_palat[i].setSijainti((i % 5) + 1, paikka);
+		}
+		apupala.setIrtopala(false);
+		apupala.setSijainti(1, paikka);
+		_palat[(paikka - 1) * _alueenKoko] = apupala;
+	}
+	if (reuna == Julkinen::OIKEA){
+		//Uusi irtopala
+		_palat[_alueenKoko * _alueenKoko] = _palat[(paikka - 1) * _alueenKoko];
+		_palat[_alueenKoko * _alueenKoko].setIrtopala(true);
+		for (unsigned int i = (paikka - 1) * _alueenKoko; i < ((paikka - 1) * _alueenKoko) + 4; i++){
+			_palat[i] = _palat[i + 1];
+			_palat[i].setSijainti((i % 5) + 1, paikka);
+		}
+		apupala.setIrtopala(false);
+		apupala.setSijainti(_alueenKoko, paikka);
+		_palat[((paikka - 1) * _alueenKoko) + _alueenKoko - 1] = apupala;
+	}
+	_tyonnetty = true;
 
 }
 

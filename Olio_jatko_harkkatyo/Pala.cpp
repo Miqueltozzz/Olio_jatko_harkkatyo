@@ -1,5 +1,4 @@
 #include "Pala.h"
-//T�m� tiedosto ei mene githubiin?
 
 
 Pala::Pala()
@@ -19,4 +18,20 @@ Pala::~Pala()
 Julkinen::Koordinaatti Pala::getSijainti()
 {
 	return _sijainti;
+}
+
+void Pala::setSijainti(unsigned int xkoord, unsigned int ykoord)
+{
+	_sijainti.asetaXkoordinaatti(xkoord);
+	_sijainti.asetaYkoordinaatti(ykoord);
+}
+
+void Pala::setIrtopala(bool irtopala)
+{
+	_sijainti.asetaIrtopala(irtopala);
+}
+
+void Pala::setRotaatio(unsigned int rot)
+{
+	_rotaatio = rot;
 }
