@@ -25,6 +25,9 @@ public:
 	Julkinen::ErikoispalaTyyppi haeErikoisPalaTyyppi();
 	char haeEsineMerkki();
 	std::string haeEsinePelaaja();
+
+	//bool lapiKavely(Julkinen::Suunta);
+	//bool sisaanKavely(Julkinen::Suunta);
 	//esineen metodit
 
 private:

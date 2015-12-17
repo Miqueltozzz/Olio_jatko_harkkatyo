@@ -164,6 +164,79 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 
 void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 
+	if (_pelaajaLiikkunut){
+		throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_TUNNISTAMATON);
+		return;
+	}
+	//Raakiletapaus?
+	if (!_tyonnetty  && suunta != Julkinen::AUTOMAATTI){
+		throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_IRTOPALAA_EI_OLE_TYONNETTY);
+		return;
+	}
+	if (maara < 0){
+		throw Julkinen::Komentovirhe(Julkinen::Komentovirhe::VIRHE_TUNNISTAMATON_PARAMETRI);
+	}
+	if (maara == 0 && (suunta != Julkinen::PAIKALLAAN && suunta != Julkinen::AUTOMAATTI)){
+		throw Julkinen::Komentovirhe(Julkinen::Komentovirhe::VIRHE_TUNNISTAMATON_KOMENTO);
+	}
+
+	Pelaaja pelaaja(_pelaajat[_vuorossa]);
+	int xkoord = (int) pelaaja.haeSijainti().haeXkoordinaatti();
+	int ykoord = (int) pelaaja.haeSijainti().haeYkoordinaatti();
+
+	//TODO: liikkumismahdollisuuksien tarkistus
+	if (suunta == Julkinen::ALAS){
+		//Tarkista ettei mennä laudan reunan yli
+		if (ykoord + (int) maara > _alueenKoko){
+			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
+		}
+		//Tarkista ettei kukaan pelaajista ole ruudussa
+		for (unsigned int i = 0; i < _pelaajat.size(); i++){
+			Julkinen::Koordinaatti sij = _pelaajat[i].haeSijainti();
+			if (sij.haeXkoordinaatti() == xkoord && sij.haeYkoordinaatti() == ykoord + (int) maara){
+				throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
+			}
+		}
+	}
+	if (suunta == Julkinen::YLOS){
+		//Tarkista ettei mennä laudan reunan yli
+		if (ykoord - (int) maara < 1){
+			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
+		}
+		//Tarkista ettei kukaan pelaajista ole ruudussa
+		for (unsigned int i = 0; i < _pelaajat.size(); i++){
+			Julkinen::Koordinaatti sij = _pelaajat[i].haeSijainti();
+			if (sij.haeXkoordinaatti() == xkoord && sij.haeYkoordinaatti() == ykoord - (int)maara){
+				throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
+			}
+		}
+	}
+	if (suunta == Julkinen::OIKEALLE){
+		//Tarkista ettei mennä laudan reunan yli
+		if (xkoord + (int) maara > _alueenKoko){
+			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
+		}
+		//Tarkista ettei kukaan pelaajista ole ruudussa
+		for (unsigned int i = 0; i < _pelaajat.size(); i++){
+			Julkinen::Koordinaatti sij = _pelaajat[i].haeSijainti();
+			if (sij.haeXkoordinaatti() == xkoord + (int) maara && sij.haeYkoordinaatti() == ykoord){
+				throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
+			}
+		}
+	}
+	if (suunta == Julkinen::VASEMMALLE){
+		//Tarkista ettei mennä laudan reunan yli
+		if (xkoord - (int) maara < 1){
+			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
+		}
+		//Tarkista ettei kukaan pelaajista ole ruudussa
+		for (unsigned int i = 0; i < _pelaajat.size(); i++){
+			Julkinen::Koordinaatti sij = _pelaajat[i].haeSijainti();
+			if (sij.haeXkoordinaatti() == xkoord - (int)maara && sij.haeYkoordinaatti() == ykoord){
+				throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
+			}
+		}
+	}
 }
 
 bool Peli::vaihdaVuoro() {
