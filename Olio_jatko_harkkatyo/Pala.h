@@ -18,6 +18,8 @@ public:
 	void setSijainti(unsigned int xkoord, unsigned int ykoord);
 	void setIrtopala(bool irtopala);
 	void setRotaatio(unsigned int rot);
+	void setErikoisPalaTyyppi(Julkinen::ErikoispalaTyyppi erikoispalatyyppi);
+	void setErikoisPalaKohde(Julkinen::Koordinaatti erikoisPalaKohde);
 
 	Julkinen::PalaTyyppi haePalaTyyppi();
 	unsigned int haeRotaatio();
@@ -25,6 +27,7 @@ public:
 	Julkinen::ErikoispalaTyyppi haeErikoisPalaTyyppi();
 	char haeEsineMerkki();
 	std::string haeEsinePelaaja();
+	Julkinen::Koordinaatti haeErikoisPalaKohde();
 	//esineen metodit
 
 private:
@@ -34,6 +37,7 @@ private:
 	unsigned int _rotaatio;
 	Julkinen::Koordinaatti _sijainti;
 	Julkinen::ErikoispalaTyyppi _erikoispalaTyyppi;
+	Julkinen::Koordinaatti _erikoisPalaKohde;
 
 	//esineen muuttujat
 	char _merkki;

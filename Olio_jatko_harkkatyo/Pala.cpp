@@ -5,8 +5,8 @@ Pala::Pala()
 {
 }
 
-Pala::Pala(Julkinen::PalaTyyppi pala, unsigned int rotaatio, Julkinen::Koordinaatti sijainti):
-	_pala(pala),_rotaatio(rotaatio),_sijainti(sijainti)
+Pala::Pala(Julkinen::PalaTyyppi pala, unsigned int rotaatio, Julkinen::Koordinaatti sijainti) :
+	_pala(pala), _rotaatio(rotaatio), _sijainti(sijainti), _erikoispalaTyyppi(Julkinen::NORMAALI), _merkki('0'), _pelaaja("")
 {
 }
 void Pala::asetaEsine(std::string pelaaja, char merkki)
@@ -42,6 +42,16 @@ void Pala::setRotaatio(unsigned int rot)
 	_rotaatio = rot;
 }
 
+void Pala::setErikoisPalaTyyppi(Julkinen::ErikoispalaTyyppi erikoispalatyyppi)
+{
+	_erikoispalaTyyppi = erikoispalatyyppi;
+}
+
+void Pala::setErikoisPalaKohde(Julkinen::Koordinaatti erikoisPalaKohde)
+{
+	_erikoisPalaKohde = erikoisPalaKohde;
+}
+
 Julkinen::PalaTyyppi Pala::haePalaTyyppi()
 {
 	return _pala;
@@ -70,4 +80,9 @@ char Pala::haeEsineMerkki()
 std::string Pala::haeEsinePelaaja()
 {
 	return _pelaaja;
+}
+
+Julkinen::Koordinaatti Pala::haeErikoisPalaKohde()
+{
+	return _erikoisPalaKohde;
 }
