@@ -103,7 +103,7 @@ void Peli::asetaPalanTyyppi(Julkinen::ErikoispalaTyyppi tyyppi, Julkinen::Koordi
 }
 
 void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned int rotaatio) {
-	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
+	
 	if (_tyonnetty){
 		throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_IRTOPALAA_ON_JO_TYONNETTY);
 		return;
@@ -232,11 +232,12 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 	_naytto->komentoAloitaRakennus();
 	paivitaNaytto();
 	_naytto->komentoLopetaRakennus();
+	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
 	
 }
 
 void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
-	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
+	
 	if (_pelaajaLiikkunut){
 		throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_TUNNISTAMATON);
 		return;
@@ -410,6 +411,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 	_naytto->komentoAloitaRakennus();
 	paivitaNaytto();
 	_naytto->komentoLopetaRakennus();
+	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
 	
 }
 
