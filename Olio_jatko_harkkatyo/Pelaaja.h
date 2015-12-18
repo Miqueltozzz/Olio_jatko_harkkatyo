@@ -16,10 +16,25 @@ public:
 	std::string haeNimi();
 	char haeLyhenne();
 
+	std::string haeKeratutEsineet();
+	std::string haeKerattavatEsineet();
+	std::string haeEdellinenToiminto();
+
+	char haeTamanHetkinenEsine(void);
+
+	void asetaKeratutEsineet(std::string keratutesineet);
+	void asetaKerattavatEsineet(std::string kerattavatesineet);
+	void asetaEdellinenToiminto(std::string edellinentoiminto);
+
+	void lisaaKerattavaEsine(char lisattavaEsine);
+
 	~Pelaaja();
 private:
 	std::string _nimi;
 	Julkinen::Koordinaatti _sijainti;
 	Julkinen::PelaajaTyyppi _tyyppi;
 	char _lyhenne;
+	std::string _keratytesineet;
+	std::string _kerattavatesineet;
+	std::string _edellinentoiminto;
 };

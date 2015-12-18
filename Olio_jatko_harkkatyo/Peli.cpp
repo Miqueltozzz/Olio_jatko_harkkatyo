@@ -72,6 +72,13 @@ void Peli::lisaaEsine(char merkki, Julkinen::Koordinaatti const& sijainti, std::
 			_palat[a].asetaEsine(pelaaja, merkki);
 		}
 	}
+	for (unsigned int a = 0; a < _pelaajat.size(); a++)
+	{
+		if (_pelaajat[a].haeNimi() == pelaaja)
+		{
+			_pelaajat[a].lisaaKerattavaEsine(merkki);
+		}
+	}
 
 }
 
@@ -130,13 +137,13 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		apupala.setSijainti(paikka, _alueenKoko);
 		_palat[(paikka - 1) + (_alueenKoko * (_alueenKoko - 1))] = apupala;
 
-		//siirr‰ pelaajat
+		//siirr√§ pelaajat
 		for (int i = 0; i < _pelaajat.size(); i++){
 			Julkinen::Koordinaatti koordinaatit = _pelaajat[i].haeSijainti();
 			if (koordinaatit.haeXkoordinaatti() == paikka){
 				if ((int)koordinaatit.haeYkoordinaatti() - 1 > 0){
 					_pelaajat[i].asetaYkoord(koordinaatit.haeYkoordinaatti() - 1);
-				}
+	}
 				else{
 					_pelaajat[i].asetaYkoord(_alueenKoko);
 				}
@@ -155,7 +162,7 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		apupala.setSijainti(paikka, 1);
 		_palat[(paikka - 1)] = apupala;
 
-		//siirr‰ pelaajat
+		//siirr√§ pelaajat
 		for (int i = 0; i < _pelaajat.size(); i++){
 			Julkinen::Koordinaatti koordinaatit = _pelaajat[i].haeSijainti();
 			if (koordinaatit.haeXkoordinaatti() == paikka){
@@ -180,13 +187,13 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		apupala.setSijainti(1, paikka);
 		_palat[(paikka - 1) * _alueenKoko] = apupala;
 
-		//siirr‰ pelaajat
+		//siirr√§ pelaajat
 		for (int i = 0; i < _pelaajat.size(); i++){
 			Julkinen::Koordinaatti koordinaatit = _pelaajat[i].haeSijainti();
 			if (koordinaatit.haeYkoordinaatti() == paikka){
 				if ((int) koordinaatit.haeXkoordinaatti() + 1 <= _alueenKoko){
 					_pelaajat[i].asetaXkoord(koordinaatit.haeXkoordinaatti() + 1);
-				}
+	}
 				else{
 					_pelaajat[i].asetaXkoord(1);
 				}
@@ -205,7 +212,7 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		apupala.setSijainti(_alueenKoko, paikka);
 		_palat[((paikka - 1) * _alueenKoko) + _alueenKoko - 1] = apupala;
 
-		//siirr‰ pelaajat
+		//siirr√§ pelaajat
 		for (int i = 0; i < _pelaajat.size(); i++){
 			Julkinen::Koordinaatti koordinaatit = _pelaajat[i].haeSijainti();
 			if (koordinaatit.haeYkoordinaatti() == paikka){
@@ -217,7 +224,7 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 				}
 			}
 
-		}
+	}
 	}
 	_tyonnetty = true;
 	paivitaNaytto();
@@ -247,7 +254,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 	int ykoord = (int)pelaaja.haeSijainti().haeYkoordinaatti();
 
 	if (suunta == Julkinen::ALAS){
-		//Tarkista ettei menn‰ laudan reunan yli
+		//Tarkista ettei mennÔøΩ laudan reunan yli
 		if (ykoord + (int)maara > _alueenKoko){
 			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 		}
@@ -258,7 +265,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 				throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 			}
 		}
-		//Tarkista ettei reitill‰ ole seini‰
+		//Tarkista ettei reitillÔøΩ ole seiniÔøΩ
 		if (maara > 1){
 			for (unsigned int i = 0; i < maara - 1; i++){
 				if (!_palat[xkoord - 1 + ((ykoord + i) * _alueenKoko)].lapiKavely(suunta)){
@@ -273,7 +280,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		_pelaajat[_vuorossa].asetaYkoord(ykoord + maara);
 	}
 	else if (suunta == Julkinen::YLOS){
-		//Tarkista ettei menn‰ laudan reunan yli
+		//Tarkista ettei menn√§ laudan reunan yli
 		if (ykoord - (int)maara < 1){
 			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 		}
@@ -284,7 +291,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 				throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 			}
 		}
-		//Tarkista ettei reitill‰ ole seini‰
+		//Tarkista ettei reitillÔøΩ ole seiniÔøΩ
 		if (maara > 1){
 			for (unsigned int i = 2; i <= maara; i++){
 				if (!_palat[xkoord - 1 + ((ykoord - i) * _alueenKoko)].lapiKavely(suunta)){
@@ -299,7 +306,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		_pelaajat[_vuorossa].asetaYkoord(ykoord - maara);
 	}
 	else if (suunta == Julkinen::OIKEALLE){
-		//Tarkista ettei menn‰ laudan reunan yli
+		//Tarkista ettei menn√§ laudan reunan yli
 		if (xkoord + (int)maara > _alueenKoko){
 			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 		}
@@ -310,7 +317,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 				throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 			}
 		}
-		//Tarkista ettei reitill‰ ole seini‰
+		//Tarkista ettei reitillÔøΩ ole seiniÔøΩ
 		if (maara > 1){
 			for (unsigned int i = 0; i < maara - 1; i++){
 				if (!_palat[xkoord + i + ((ykoord - 1) * _alueenKoko)].lapiKavely(suunta)){
@@ -325,7 +332,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		_pelaajat[_vuorossa].asetaXkoord(xkoord + maara);
 	}
 	else if (suunta == Julkinen::VASEMMALLE){
-		//Tarkista ettei menn‰ laudan reunan yli
+		//Tarkista ettei menn√§ laudan reunan yli
 		if (xkoord - (int)maara < 1){
 			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 		}
@@ -336,7 +343,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 				throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 			}
 		}
-		//Tarkista ettei reitill‰ ole seini‰
+		//Tarkista ettei reitillÔøΩ ole seiniÔøΩ
 		if (maara > 1){
 			for (unsigned int i = 2; i <= maara; i++){
 				if (!_palat[xkoord - i + ((ykoord - 1) * _alueenKoko)].lapiKavely(suunta)){
@@ -392,6 +399,12 @@ void Peli::paivitaNaytto()
 			_naytto->esineLaudalle(_palat[a].haeEsineMerkki(), _palat[a].haeSijainti());
 		}
 	}
+	//tulosta pelaajien nimet ja esineet
+	for (unsigned int a = 0; a < _pelaajat.size(); a++)
+	{
+		_naytto->tulostaPelaajantiedot(_pelaajat[a].haeNimi(), _pelaajat[a].haeKeratutEsineet(), _pelaajat[a].haeKerattavatEsineet(), _pelaajat[a].haeEdellinenToiminto());
+	}
+
 }
 
 Julkinen::PelaajaTyyppi Peli::haeVuorossa() {
