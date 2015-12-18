@@ -71,7 +71,7 @@ void Pelaaja::lisaaKerattavaEsine(char lisattavaEsine)
 void Pelaaja::keraaTamanHetkinenEsine(void)
 {
 	_keratytesineet += _kerattavatesineet[0];
-	_kerattavatesineet.erase(0);
+	_kerattavatesineet.erase(0, 1);
 }
 
 

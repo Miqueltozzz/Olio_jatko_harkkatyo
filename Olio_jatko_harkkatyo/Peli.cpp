@@ -422,6 +422,13 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 			_naytto->ilmoitusEsinePoimittu(esine, pelaaja.haeNimi());
 		}
 	}
+	else if (suunta == Julkinen::PAIKALLAAN){
+		esine = _palat[(xkoord - 1) + (ykoord - 1) * _alueenKoko].haeEsineMerkki();
+		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == esine){
+			_pelaajat[_vuorossa].keraaTamanHetkinenEsine();
+			_naytto->ilmoitusEsinePoimittu(esine, pelaaja.haeNimi());
+		}
+	}
 
 	_pelaajaLiikkunut = true;
 	_naytto->komentoAloitaRakennus();
