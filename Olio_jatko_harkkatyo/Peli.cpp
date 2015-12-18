@@ -237,7 +237,6 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_TUNNISTAMATON);
 		return;
 	}
-	//Raakiletapaus?
 	if (!_tyonnetty  && suunta != Julkinen::AUTOMAATTI){
 		throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_IRTOPALAA_EI_OLE_TYONNETTY);
 		return;
@@ -276,8 +275,20 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		if (!_palat[xkoord - 1 + ((ykoord + maara - 1) * _alueenKoko)].sisaanKavely(suunta)){
 			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 		}
+		//Tarkista onko reitillä kerättäviä esineitä
+		if (maara > 1){
+			for (unsigned int i = 0; i < maara - 1; i++){
+				if (_pelaajat[i].haeTamanHetkinenEsine() == _palat[xkoord - 1 + ((ykoord + maara - 1) * _alueenKoko)].haeEsineMerkki()){
+					_pelaajat[i].keraaTamanHetkinenEsine();
+				}
+			}
+		}
 		//Liiku alas
 		_pelaajat[_vuorossa].asetaYkoord(ykoord + maara);
+		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == _palat[(xkoord - 1) + (ykoord + maara - 1) * _alueenKoko].haeEsineMerkki()){
+			_pelaajat[_vuorossa].keraaTamanHetkinenEsine();
+			_naytto->ilmoitusEsinePoimittu(_palat[(xkoord - 1) + (ykoord + maara - 1) * _alueenKoko].haeEsineMerkki(), pelaaja.haeNimi());
+		}
 	}
 	else if (suunta == Julkinen::YLOS){
 		//Tarkista ettei mennÃ¤ laudan reunan yli
@@ -302,8 +313,19 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		if (!_palat[xkoord - 1 + ((ykoord - maara - 1) * _alueenKoko)].sisaanKavely(suunta)){
 			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 		}
+		//Tarkista onko reitillä kerättäviä esineitä
+		if (maara > 1){
+			for (unsigned int i = 2; i <= maara; i++){
+				if (_pelaajat[i].haeTamanHetkinenEsine() == _palat[xkoord - 1 + ((ykoord - i) * _alueenKoko)].haeEsineMerkki()){
+					_pelaajat[i].keraaTamanHetkinenEsine();
+				}
+			}
+		}
 		//Liiku ylos
 		_pelaajat[_vuorossa].asetaYkoord(ykoord - maara);
+		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == _palat[(xkoord - 1) + (ykoord - maara - 1) * _alueenKoko].haeEsineMerkki()){
+			_pelaajat[_vuorossa].keraaTamanHetkinenEsine();
+		}
 	}
 	else if (suunta == Julkinen::OIKEALLE){
 		//Tarkista ettei mennÃ¤ laudan reunan yli
@@ -328,8 +350,19 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		if (!_palat[xkoord + maara - 1 + ((ykoord - 1) * _alueenKoko)].sisaanKavely(suunta)){
 			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 		}
+		//Tarkista onko reitillä kerättäviä esineitä
+		if (maara > 1){
+			for (unsigned int i = 0; i < maara - 1; i++){
+				if (_pelaajat[i].haeTamanHetkinenEsine() == _palat[xkoord + i + ((ykoord - 1) * _alueenKoko)].haeEsineMerkki()){
+					_pelaajat[i].keraaTamanHetkinenEsine();
+				}
+			}
+		}
 		//Liiku oikealle
 		_pelaajat[_vuorossa].asetaXkoord(xkoord + maara);
+		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == _palat[(xkoord + maara - 1) + (ykoord - 1) * _alueenKoko].haeEsineMerkki()){
+			_pelaajat[_vuorossa].keraaTamanHetkinenEsine();
+		}
 	}
 	else if (suunta == Julkinen::VASEMMALLE){
 		//Tarkista ettei mennÃ¤ laudan reunan yli
@@ -354,8 +387,19 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		if (!_palat[xkoord - maara - 1 + ((ykoord - 1) * _alueenKoko)].sisaanKavely(suunta)){
 			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 		}
+		//Tarkista ettei reitillä ole kerättäviä esineitä
+		if (maara > 1){
+			for (unsigned int i = 2; i <= maara; i++){
+				if (_pelaajat[i].haeTamanHetkinenEsine() == _palat[xkoord - i + ((ykoord - 1) * _alueenKoko)].haeEsineMerkki()){
+					_pelaajat[i].keraaTamanHetkinenEsine();
+				}
+			}
+		}
 		//Liiku vasemmalle
 		_pelaajat[_vuorossa].asetaXkoord(xkoord - maara);
+		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == _palat[(xkoord - maara - 1) + (ykoord - 1) * _alueenKoko].haeEsineMerkki()){
+			_pelaajat[_vuorossa].keraaTamanHetkinenEsine();
+		}
 	}
 
 	_pelaajaLiikkunut = true;
