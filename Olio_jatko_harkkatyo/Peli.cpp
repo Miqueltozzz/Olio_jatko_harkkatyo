@@ -252,6 +252,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 	}
 
 	Pelaaja pelaaja(_pelaajat[_vuorossa]);
+	char esine = 0;
 	int xkoord = (int)pelaaja.haeSijainti().haeXkoordinaatti();
 	int ykoord = (int)pelaaja.haeSijainti().haeYkoordinaatti();
 
@@ -281,16 +282,19 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		//Tarkista onko reitillä kerättäviä esineitä
 		if (maara > 1){
 			for (unsigned int i = 0; i < maara - 1; i++){
-				if (_pelaajat[i].haeTamanHetkinenEsine() == _palat[xkoord - 1 + ((ykoord + maara - 1) * _alueenKoko)].haeEsineMerkki()){
+				esine = _palat[xkoord - 1 + ((ykoord + maara - 1) * _alueenKoko)].haeEsineMerkki();
+				if (_pelaajat[i].haeTamanHetkinenEsine() == esine){
 					_pelaajat[i].keraaTamanHetkinenEsine();
+					_naytto->ilmoitusEsinePoimittu(esine, pelaaja.haeNimi());
 				}
 			}
 		}
 		//Liiku alas
 		_pelaajat[_vuorossa].asetaYkoord(ykoord + maara);
-		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == _palat[(xkoord - 1) + (ykoord + maara - 1) * _alueenKoko].haeEsineMerkki()){
+		esine = _palat[(xkoord - 1) + (ykoord + maara - 1) * _alueenKoko].haeEsineMerkki();
+		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == esine){
 			_pelaajat[_vuorossa].keraaTamanHetkinenEsine();
-			_naytto->ilmoitusEsinePoimittu(_palat[(xkoord - 1) + (ykoord + maara - 1) * _alueenKoko].haeEsineMerkki(), pelaaja.haeNimi());
+			_naytto->ilmoitusEsinePoimittu(esine, pelaaja.haeNimi());
 		}
 	}
 	else if (suunta == Julkinen::YLOS){
@@ -319,15 +323,19 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		//Tarkista onko reitillä kerättäviä esineitä
 		if (maara > 1){
 			for (unsigned int i = 2; i <= maara; i++){
-				if (_pelaajat[i].haeTamanHetkinenEsine() == _palat[xkoord - 1 + ((ykoord - i) * _alueenKoko)].haeEsineMerkki()){
+				esine = _palat[xkoord - 1 + ((ykoord - i) * _alueenKoko)].haeEsineMerkki();
+				if (_pelaajat[i].haeTamanHetkinenEsine() == esine){
 					_pelaajat[i].keraaTamanHetkinenEsine();
+					_naytto->ilmoitusEsinePoimittu(esine, pelaaja.haeNimi());
 				}
 			}
 		}
 		//Liiku ylos
 		_pelaajat[_vuorossa].asetaYkoord(ykoord - maara);
-		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == _palat[(xkoord - 1) + (ykoord - maara - 1) * _alueenKoko].haeEsineMerkki()){
+		esine = _palat[(xkoord - 1) + (ykoord - maara - 1) * _alueenKoko].haeEsineMerkki();
+		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == esine){
 			_pelaajat[_vuorossa].keraaTamanHetkinenEsine();
+			_naytto->ilmoitusEsinePoimittu(esine, pelaaja.haeNimi());
 		}
 	}
 	else if (suunta == Julkinen::OIKEALLE){
@@ -356,15 +364,19 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		//Tarkista onko reitillä kerättäviä esineitä
 		if (maara > 1){
 			for (unsigned int i = 0; i < maara - 1; i++){
-				if (_pelaajat[i].haeTamanHetkinenEsine() == _palat[xkoord + i + ((ykoord - 1) * _alueenKoko)].haeEsineMerkki()){
+				esine = _palat[xkoord + i + ((ykoord - 1) * _alueenKoko)].haeEsineMerkki();
+				if (_pelaajat[i].haeTamanHetkinenEsine() == esine){
 					_pelaajat[i].keraaTamanHetkinenEsine();
+					_naytto->ilmoitusEsinePoimittu(esine, pelaaja.haeNimi());
 				}
 			}
 		}
 		//Liiku oikealle
 		_pelaajat[_vuorossa].asetaXkoord(xkoord + maara);
-		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == _palat[(xkoord + maara - 1) + (ykoord - 1) * _alueenKoko].haeEsineMerkki()){
+		esine = _palat[(xkoord + maara - 1) + (ykoord - 1) * _alueenKoko].haeEsineMerkki();
+		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == esine){
 			_pelaajat[_vuorossa].keraaTamanHetkinenEsine();
+			_naytto->ilmoitusEsinePoimittu(esine, pelaaja.haeNimi());
 		}
 	}
 	else if (suunta == Julkinen::VASEMMALLE){
@@ -393,15 +405,19 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		//Tarkista ettei reitillä ole kerättäviä esineitä
 		if (maara > 1){
 			for (unsigned int i = 2; i <= maara; i++){
-				if (_pelaajat[i].haeTamanHetkinenEsine() == _palat[xkoord - i + ((ykoord - 1) * _alueenKoko)].haeEsineMerkki()){
+				esine = _palat[xkoord - i + ((ykoord - 1) * _alueenKoko)].haeEsineMerkki();
+				if (_pelaajat[i].haeTamanHetkinenEsine() == esine){
 					_pelaajat[i].keraaTamanHetkinenEsine();
+					_naytto->ilmoitusEsinePoimittu(esine, pelaaja.haeNimi());
 				}
 			}
 		}
 		//Liiku vasemmalle
 		_pelaajat[_vuorossa].asetaXkoord(xkoord - maara);
-		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == _palat[(xkoord - maara - 1) + (ykoord - 1) * _alueenKoko].haeEsineMerkki()){
+		esine = _palat[(xkoord - maara - 1) + (ykoord - 1) * _alueenKoko].haeEsineMerkki();
+		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == esine){
 			_pelaajat[_vuorossa].keraaTamanHetkinenEsine();
+			_naytto->ilmoitusEsinePoimittu(esine, pelaaja.haeNimi());
 		}
 	}
 
