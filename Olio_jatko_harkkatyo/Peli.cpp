@@ -442,6 +442,10 @@ bool Peli::vaihdaVuoro() {
 	DEBUG_OUTPUT("vaihdaVuoro" << std::endl);
 	_pelaajaLiikkunut = false;
 	_tyonnetty= false;
+	if (_pelaajat[_vuorossa].haeKerattavatEsineet().size() == 0)	//jos peli on voitettu
+	{
+		return 0;
+	}
 	//palauttaa 0 jos peli loppuu
 	if (_vuorossa == _pelaajat.size() - 1)
 	{
