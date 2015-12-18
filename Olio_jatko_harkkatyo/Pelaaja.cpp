@@ -6,7 +6,7 @@ Pelaaja::Pelaaja()
 }
 
 Pelaaja::Pelaaja(Julkinen::PelaajaTyyppi tyyppi, std::string nimi, char lyhenne, Julkinen::Koordinaatti sijainti):
-	_tyyppi(tyyppi),_nimi(nimi),_lyhenne(lyhenne),_sijainti(sijainti)
+	_tyyppi(tyyppi),_nimi(nimi),_lyhenne(lyhenne),_sijainti(sijainti),_kerattavatesineet(""),_keratytesineet(""),_edellinentoiminto("")
 	//Parametrinen rakentaja /Mikael Jokinen
 {
 }
@@ -25,6 +25,38 @@ std::string Pelaaja::haeNimi()
 char Pelaaja::haeLyhenne()
 {
 	return _lyhenne;
+}
+std::string Pelaaja::haeKeratutEsineet()
+{
+	return _keratytesineet;
+}
+std::string Pelaaja::haeKerattavatEsineet()
+{
+	return _kerattavatesineet;
+}
+std::string Pelaaja::haeEdellinenToiminto()
+{
+	return _edellinentoiminto;
+}
+char Pelaaja::haeTamanHetkinenEsine(void)
+{
+	return (char)_kerattavatesineet[0];
+}
+void Pelaaja::asetaKeratutEsineet(std::string keratutesineet)
+{
+	_keratytesineet = keratutesineet;
+}
+void Pelaaja::asetaKerattavatEsineet(std::string kerattavatesineet)
+{
+	_kerattavatesineet = kerattavatesineet;
+}
+void Pelaaja::asetaEdellinenToiminto(std::string edellinentoiminto)
+{
+	_edellinentoiminto = edellinentoiminto;
+}
+void Pelaaja::lisaaKerattavaEsine(char lisattavaEsine)
+{
+	_kerattavatesineet += lisattavaEsine;
 }
 ;
 
