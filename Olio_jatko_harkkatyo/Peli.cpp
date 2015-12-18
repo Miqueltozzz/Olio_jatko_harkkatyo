@@ -28,6 +28,7 @@ void Peli::alustusLopeta()
 	_peliTila = true;
 	paivitaNaytto();
 	_naytto->komentoLopetaRakennus();
+	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
 	JALKIEHTO(onkoPelitilassa());
 }
 
@@ -118,7 +119,7 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		throw Julkinen::Komentovirhe(Julkinen::Komentovirhe::VIRHE_VIRHEELLINEN_ROTAATIO);
 		return;
 	}
-	_naytto->komentoAloitaRakennus();
+	
 	//Irtopala talteen
 	Pala apupala(_palat[_alueenKoko * _alueenKoko]);
 	apupala.setRotaatio(rotaatio);
@@ -227,8 +228,10 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 	}
 	}
 	_tyonnetty = true;
+	_naytto->komentoAloitaRakennus();
 	paivitaNaytto();
 	_naytto->komentoLopetaRakennus();
+	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
 }
 
 void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
@@ -403,7 +406,10 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 	}
 
 	_pelaajaLiikkunut = true;
-
+	_naytto->komentoAloitaRakennus();
+	paivitaNaytto();
+	_naytto->komentoLopetaRakennus();
+	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
 }
 
 bool Peli::vaihdaVuoro() {
