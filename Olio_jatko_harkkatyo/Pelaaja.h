@@ -26,6 +26,8 @@ public:
 
 	void lisaaKerattavaEsine(char lisattavaEsine);
 
+	void keraaTamanHetkinenEsine(void);
+
 	~Pelaaja();
 private:
 	std::string _nimi;

@@ -58,7 +58,13 @@ void Pelaaja::lisaaKerattavaEsine(char lisattavaEsine)
 {
 	_kerattavatesineet += lisattavaEsine;
 }
-;
+
+void Pelaaja::keraaTamanHetkinenEsine(void)
+{
+	_keratytesineet += _kerattavatesineet[0];
+	_kerattavatesineet.erase(0);
+}
+
 
 Pelaaja::~Pelaaja()
 {
