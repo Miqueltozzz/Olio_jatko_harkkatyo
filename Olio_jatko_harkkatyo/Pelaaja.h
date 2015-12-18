@@ -18,6 +18,7 @@ public:
 
 	std::string haeKeratutEsineet();
 	std::string haeKerattavatEsineet();
+	std::string haeKerattavatEsineetTulostukseen();
 	std::string haeEdellinenToiminto();
 
 	char haeTamanHetkinenEsine(void);

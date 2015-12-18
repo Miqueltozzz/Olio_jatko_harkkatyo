@@ -43,6 +43,15 @@ std::string Pelaaja::haeKerattavatEsineet()
 {
 	return _kerattavatesineet;
 }
+std::string Pelaaja::haeKerattavatEsineetTulostukseen()
+{
+	std::string temp = _kerattavatesineet;
+	for (unsigned int a = 1; a < temp.size(); a++)
+	{
+		temp[a] = '*';
+	}
+	return temp;
+}
 std::string Pelaaja::haeEdellinenToiminto()
 {
 	return _edellinentoiminto;
