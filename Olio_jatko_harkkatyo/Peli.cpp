@@ -482,11 +482,6 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		}
 	}
 	else if (suunta == Julkinen::PAIKALLAAN){
-		//MUISTA POISTAA
-		if (_vuorossa == 0){
-			_pelaajat[_vuorossa].asetaKirottu(true);
-			_naytto->ilmoitusErikoispalaanAstuttu(Julkinen::KIROTTU, _pelaajat[_vuorossa].haeNimi());
-		}
 		esine = _palat[(xkoord - 1) + (ykoord - 1) * _alueenKoko].haeEsineMerkki();
 		if (_pelaajat[_vuorossa].haeTamanHetkinenEsine() == esine){
 			_pelaajat[_vuorossa].keraaTamanHetkinenEsine();
