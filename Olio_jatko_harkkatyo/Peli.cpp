@@ -140,7 +140,7 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		_palat[(paikka - 1) + (_alueenKoko * (_alueenKoko - 1))] = apupala;
 
 		//siirrä pelaajat
-		for (int i = 0; i < _pelaajat.size(); i++){
+		for (unsigned int i = 0; i < _pelaajat.size(); i++){
 			Julkinen::Koordinaatti koordinaatit = _pelaajat[i].haeSijainti();
 			if (koordinaatit.haeXkoordinaatti() == paikka){
 				if ((int)koordinaatit.haeYkoordinaatti() - 1 > 0){
@@ -165,7 +165,7 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		_palat[(paikka - 1)] = apupala;
 
 		//siirrä pelaajat
-		for (int i = 0; i < _pelaajat.size(); i++){
+		for (unsigned int i = 0; i < _pelaajat.size(); i++){
 			Julkinen::Koordinaatti koordinaatit = _pelaajat[i].haeSijainti();
 			if (koordinaatit.haeXkoordinaatti() == paikka){
 				if ((int) koordinaatit.haeYkoordinaatti() + 1 <= _alueenKoko){
@@ -190,7 +190,7 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		_palat[(paikka - 1) * _alueenKoko] = apupala;
 
 		//siirrä pelaajat
-		for (int i = 0; i < _pelaajat.size(); i++){
+		for (unsigned int i = 0; i < _pelaajat.size(); i++){
 			Julkinen::Koordinaatti koordinaatit = _pelaajat[i].haeSijainti();
 			if (koordinaatit.haeYkoordinaatti() == paikka){
 				if ((int) koordinaatit.haeXkoordinaatti() + 1 <= _alueenKoko){
@@ -215,7 +215,7 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 		_palat[((paikka - 1) * _alueenKoko) + _alueenKoko - 1] = apupala;
 
 		//siirrä pelaajat
-		for (int i = 0; i < _pelaajat.size(); i++){
+		for (unsigned int i = 0; i < _pelaajat.size(); i++){
 			Julkinen::Koordinaatti koordinaatit = _pelaajat[i].haeSijainti();
 			if (koordinaatit.haeYkoordinaatti() == paikka){
 				if ((int) koordinaatit.haeXkoordinaatti() - 1 > 0){
@@ -475,7 +475,7 @@ void Peli::paivitaNaytto()
 	//tulosta pelaajien nimet ja esineet
 	for (unsigned int a = 0; a < _pelaajat.size(); a++)
 	{
-		_naytto->tulostaPelaajantiedot(_pelaajat[a].haeNimi(), _pelaajat[a].haeKeratutEsineet(), _pelaajat[a].haeKerattavatEsineet(), _pelaajat[a].haeEdellinenToiminto());
+		_naytto->tulostaPelaajantiedot(_pelaajat[a].haeNimi(), _pelaajat[a].haeKeratutEsineet(), _pelaajat[a].haeKerattavatEsineetTulostukseen(), _pelaajat[a].haeEdellinenToiminto());
 	}
 
 }
