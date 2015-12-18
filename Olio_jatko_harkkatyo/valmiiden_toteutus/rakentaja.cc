@@ -149,7 +149,7 @@ void Rakentaja::lisaaPalat()
 			catch (Julkinen::ToteuttamatonVirhe virhe)
 			{
 				std::cerr << virhe << std::endl;
-				_peli->asetaPalanTyyppi(Julkinen::NORMAALI, sijainti, kohde);
+				_peli->asetaPalanTyyppi(tyyppi, sijainti, kohde);
 
 			}
 

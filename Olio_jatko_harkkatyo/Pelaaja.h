@@ -31,6 +31,8 @@ public:
 
 	void keraaTamanHetkinenEsine(void);
 
+	bool onkoKirottu();
+	void asetaKirottu(bool kirottu);
 	~Pelaaja();
 private:
 	std::string _nimi;
@@ -40,4 +42,5 @@ private:
 	std::string _keratytesineet;
 	std::string _kerattavatesineet;
 	std::string _edellinentoiminto;
+	bool _kirottu;
 };

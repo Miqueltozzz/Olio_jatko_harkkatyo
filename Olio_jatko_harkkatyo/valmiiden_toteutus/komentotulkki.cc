@@ -55,6 +55,17 @@ void Komentotulkki::kaynnistaKomentotulkki(std::shared_ptr<Julkinen::Pelirajapin
 				}
 				_edellinen = TYHJA;
 			}
+			else if (_peli->onkoVuorossaKirottu()){
+				//skipataan vuoro
+				if (_peli->onkoTyonnetty()){
+					_peli->asetaVuorossaKirottu(false);
+					_peli->asetaLiikkunut(true);
+					_edellinen = LIIKU;
+				}
+				else{
+					_peli->asetaTyonnetty(true);
+				}
+			}
 			else if(_peli->haeVuorossa() == Julkinen::TIETOKONE)
 			{
 				std::cout << std::endl;

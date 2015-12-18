@@ -6,7 +6,7 @@ Pelaaja::Pelaaja()
 }
 
 Pelaaja::Pelaaja(Julkinen::PelaajaTyyppi tyyppi, std::string nimi, char lyhenne, Julkinen::Koordinaatti sijainti):
-	_tyyppi(tyyppi),_nimi(nimi),_lyhenne(lyhenne),_sijainti(sijainti),_kerattavatesineet(""),_keratytesineet(""),_edellinentoiminto("")
+_tyyppi(tyyppi), _nimi(nimi), _lyhenne(lyhenne), _sijainti(sijainti), _kerattavatesineet(""), _keratytesineet(""), _edellinentoiminto(""), _kirottu(false)
 	//Parametrinen rakentaja /Mikael Jokinen
 {
 }
@@ -83,6 +83,15 @@ void Pelaaja::keraaTamanHetkinenEsine(void)
 	_kerattavatesineet.erase(0, 1);
 }
 
+bool Pelaaja::onkoKirottu()
+{
+	return _kirottu;
+}
+
+void Pelaaja::asetaKirottu(bool kirottu)
+{
+	_kirottu = kirottu;
+}
 
 Pelaaja::~Pelaaja()
 {

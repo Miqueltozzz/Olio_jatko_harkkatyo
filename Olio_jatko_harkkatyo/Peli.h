@@ -46,6 +46,11 @@ public:
 	bool vaihdaVuoro();
 	void paivitaNaytto();//nayton pitaa olla rakennustilassa ennen tätä
 	Julkinen::PelaajaTyyppi haeVuorossa();
+	bool onkoVuorossaKirottu();
+	void asetaVuorossaKirottu(bool kirottu);
+	bool onkoTyonnetty();
+	void asetaTyonnetty(bool tyonnetty);
+	void asetaLiikkunut(bool liikkunut);
 
 private:
 	std::vector<Pelaaja> _pelaajat; //

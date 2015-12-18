@@ -305,7 +305,16 @@ Julkinen
 			 *	\return Palauttaa vuorossa olevan pelaajan <code>PelaajaTyyppi</code>.
 			 */
 			virtual PelaajaTyyppi haeVuorossa() = 0;
+
+			virtual bool onkoVuorossaKirottu() = 0;
+
+			virtual void asetaVuorossaKirottu(bool kirottu) = 0;
 			
+			virtual bool onkoTyonnetty() = 0;
+
+			virtual void asetaTyonnetty(bool tyonnetty) = 0;
+
+			virtual void asetaLiikkunut(bool liikkunut) = 0;
 	};
 }
 
