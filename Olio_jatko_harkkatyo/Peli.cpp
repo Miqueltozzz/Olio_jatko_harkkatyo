@@ -363,6 +363,8 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 }
 
 bool Peli::vaihdaVuoro() {
+	_pelaajaLiikkunut = false;
+	_tyonnetty= false;
 	//palauttaa 0 jos peli loppuu
 	if (_vuorossa == _pelaajat.size() - 1)
 	{
