@@ -152,7 +152,7 @@ Julkinen
 			 *	\brief Pelin alustusfunktio, joka lisaa palan peliin.
 			 *
 			 *	\pre Peli on alustustilassa. Pelialueen koko on määritelty. Annettuun koordinaattiin ei vielä lisätty palaa.
-			 *	\post Pelilautaan on lisätty pala.
+			 *	
 			 *		Poikkeustakuu: Perustakuu poikkeuksen sattuessa.
 			 *
 			 *	\param[in] pala Tieto siitä minkä laista palaa lisätään.
