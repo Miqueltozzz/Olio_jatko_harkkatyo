@@ -18,6 +18,15 @@ Julkinen::Koordinaatti Pelaaja::haeSijainti()
 {
 	return _sijainti;
 }
+
+void Pelaaja::asetaXkoord(unsigned int xkoord){
+	_sijainti.asetaXkoordinaatti(xkoord);
+}
+
+void Pelaaja::asetaYkoord(unsigned int ykoord){
+	_sijainti.asetaYkoordinaatti(ykoord);
+}
+
 std::string Pelaaja::haeNimi()
 {
 	return _nimi;
