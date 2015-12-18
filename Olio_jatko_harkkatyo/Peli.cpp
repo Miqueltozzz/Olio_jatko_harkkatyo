@@ -427,11 +427,12 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 	_naytto->komentoAloitaRakennus();
 	paivitaNaytto();
 	_naytto->komentoLopetaRakennus();
-	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
+	
 	
 }
 
 bool Peli::vaihdaVuoro() {
+	DEBUG_OUTPUT("vaihdaVuoro" << std::endl);
 	_pelaajaLiikkunut = false;
 	_tyonnetty= false;
 	//palauttaa 0 jos peli loppuu
@@ -443,6 +444,7 @@ bool Peli::vaihdaVuoro() {
 	{
 		_vuorossa++;
 	}
+	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
 	return 1;
 }
 
