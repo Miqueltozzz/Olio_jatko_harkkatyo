@@ -103,6 +103,7 @@ void Peli::asetaPalanTyyppi(Julkinen::ErikoispalaTyyppi tyyppi, Julkinen::Koordi
 }
 
 void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned int rotaatio) {
+	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
 	if (_tyonnetty){
 		throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_IRTOPALAA_ON_JO_TYONNETTY);
 		return;
@@ -231,11 +232,11 @@ void Peli::komentoTyonna(Julkinen::Reuna reuna, unsigned int paikka, unsigned in
 	_naytto->komentoAloitaRakennus();
 	paivitaNaytto();
 	_naytto->komentoLopetaRakennus();
-	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
+	
 }
 
 void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
-
+	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
 	if (_pelaajaLiikkunut){
 		throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_TUNNISTAMATON);
 		return;
@@ -278,7 +279,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		if (!_palat[xkoord - 1 + ((ykoord + maara - 1) * _alueenKoko)].sisaanKavely(suunta)){
 			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 		}
-		//Tarkista onko reitillä kerättäviä esineitä
+		//Tarkista onko reitillï¿½ kerï¿½ttï¿½viï¿½ esineitï¿½
 		if (maara > 1){
 			for (unsigned int i = 0; i < maara - 1; i++){
 				if (_pelaajat[i].haeTamanHetkinenEsine() == _palat[xkoord - 1 + ((ykoord + maara - 1) * _alueenKoko)].haeEsineMerkki()){
@@ -316,7 +317,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		if (!_palat[xkoord - 1 + ((ykoord - maara - 1) * _alueenKoko)].sisaanKavely(suunta)){
 			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 		}
-		//Tarkista onko reitillä kerättäviä esineitä
+		//Tarkista onko reitillï¿½ kerï¿½ttï¿½viï¿½ esineitï¿½
 		if (maara > 1){
 			for (unsigned int i = 2; i <= maara; i++){
 				if (_pelaajat[i].haeTamanHetkinenEsine() == _palat[xkoord - 1 + ((ykoord - i) * _alueenKoko)].haeEsineMerkki()){
@@ -353,7 +354,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		if (!_palat[xkoord + maara - 1 + ((ykoord - 1) * _alueenKoko)].sisaanKavely(suunta)){
 			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 		}
-		//Tarkista onko reitillä kerättäviä esineitä
+		//Tarkista onko reitillï¿½ kerï¿½ttï¿½viï¿½ esineitï¿½
 		if (maara > 1){
 			for (unsigned int i = 0; i < maara - 1; i++){
 				if (_pelaajat[i].haeTamanHetkinenEsine() == _palat[xkoord + i + ((ykoord - 1) * _alueenKoko)].haeEsineMerkki()){
@@ -390,7 +391,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 		if (!_palat[xkoord - maara - 1 + ((ykoord - 1) * _alueenKoko)].sisaanKavely(suunta)){
 			throw Julkinen::Toimintovirhe(Julkinen::Toimintovirhe::VIRHE_EI_VOITU_LIIKKUA_ANNETTUA_MAARAA);
 		}
-		//Tarkista ettei reitillä ole kerättäviä esineitä
+		//Tarkista ettei reitillï¿½ ole kerï¿½ttï¿½viï¿½ esineitï¿½
 		if (maara > 1){
 			for (unsigned int i = 2; i <= maara; i++){
 				if (_pelaajat[i].haeTamanHetkinenEsine() == _palat[xkoord - i + ((ykoord - 1) * _alueenKoko)].haeEsineMerkki()){
@@ -409,7 +410,7 @@ void Peli::komentoLiiku(Julkinen::Suunta suunta, unsigned int maara) {
 	_naytto->komentoAloitaRakennus();
 	paivitaNaytto();
 	_naytto->komentoLopetaRakennus();
-	_naytto->ilmoitusVuorossa(_pelaajat[_vuorossa].haeNimi());
+	
 }
 
 bool Peli::vaihdaVuoro() {
